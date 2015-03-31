@@ -64,12 +64,6 @@ exports.removeById = function(req, res) {
         var i=0;
         
         var ok = function(doc) {
-                
-                // i++; 
-                // if (i==doc)
-                // {
-                       // res.redirect('/viewAllusers');
-                // }
 
         };
         
