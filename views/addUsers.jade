@@ -1,0 +1,29 @@
+
+
+extends layout
+
+block pageContent
+  .container
+      h1= title
+      p Welcome to all #{title}
+        form(action='/addUsers',method='post')
+          .form-group
+            label(for='InputFirstName') First Name
+            input#InputLastName.form-control(placeholder='Enter First Name', type='text', name='FirstName')
+          .form-group
+            label(for='InputLastName') Last Name
+            input#InputFirstName.form-control(placeholder='Enter Last Name', type='text',name='LastName')
+          .form-group
+            label(for='InputAge') Age
+            input#InputAge.form-control(placeholder='Enter Age', type='text', name='Age')
+          .form-group
+            label(for='Gender') What is your Gender?
+            label.radio-inline
+              input#Gender(name='Gender', value='1', type='radio')
+              | Male
+            label.radio-inline
+              input#Gender(name='Gender', value='2', type='radio')
+              | Female
+          div
+            button.btn.btn-default(type='input') Submit
+            

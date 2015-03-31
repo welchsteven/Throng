@@ -1,0 +1,44 @@
+extends layout
+
+block pageContent
+h1 = title
+p Welcome to# {
+  title
+}
+
+.container
+  .form - group
+label(
+  for = 'InputEventStartTime') Event Date and Start Time# InputEventStartTime.input - group.date
+input.form - control(type = 'text')
+span.input - group - addon
+span.glyphicon - calendar.glyphicon
+  .form - group
+label(
+  for = 'InputEventEndTime') Event Date and End Time# InputEventEndTime.input - group.date
+input.form - control(type = 'text')
+span.input - group - addon
+span.glyphicon - calendar.glyphicon
+  .form - group
+label(
+  for = 'InputEventInvitationDate') Event Date Invitation Date# InputEventInvitationDate.input - group.date
+input.form - control(type = 'text')
+span.input - group - addon
+span.glyphicon - calendar.glyphicon
+  .form - group
+label(
+  for = 'InputEventInvitationDate') Event Invitation Platform
+select# InputEventInvitationDate.form - control
+option(value = '1') Facebook
+option(value = '2') E - Mail
+option(value = '3') Phone
+option(value = '4') Text Message
+button.btn.btn -
+  default (type = 'submit') Submit
+script.
+$('#InputEventStartTime').datetimepicker();
+$('#InputEventEndTime').datetimepicker();
+$('#InputEventInvitationDate').datetimepicker({format: 'L'});
+script(src='//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.js')
+script(src='//cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/d004434a5ff76e7b97c8b07c01f34ca69e635d97/src/js/bootstrap-datetimepicker.js')
+link(href='//cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/d004434a5ff76e7b97c8b07c01f34ca69e635d97/build/css/bootstrap-datetimepicker.css', rel='stylesheet')

@@ -1,0 +1,28 @@
+
+
+extends layout
+
+block pageContent
+  .container
+      h1= title
+      p Welcome to all #{title}
+      form(action='/viewAllUsers',method='post')
+        table.table-hover.table
+          thead
+            th #
+            th First Name
+            th Last Name
+            th Age
+            th Gender
+            th Select
+          tbody
+            each user in allUsers
+              tr
+                th(scope=row)=user._id
+                td=user.FirstName
+                td=user.LastName
+                td=user.Age
+                td=user.Gender
+                td
+                  input.form-control(type='checkbox', name='ids[]', value=user._id)
+        button.btn.btn-danger.pull-right(type='submit ') Delete!

@@ -1,0 +1,21 @@
+{
+  "name": "Throng",
+  "description": "Attendance tracking for Game Nights.",
+  "version": "0.0.1",
+  "private": true,
+  "repository": {
+  "type": "git",
+  "url": "git://github.com/welchsteven/Throng.git"
+  },
+  "scripts": {
+    "start": "node throng.js"
+  },
+  "dependencies": {
+    "express": "3.20.2",
+    "jade": "*",
+    "mongodb": "*",
+    "monk": "*",
+    "body-parser": "1.5.2"
+
+  }
+}
