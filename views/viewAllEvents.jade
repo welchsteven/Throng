@@ -1,0 +1,49 @@
+//create a page that shows the guests, add guests, select invitation response,
+// resonse platform, Attendance, arival time, departure time
+extends layout
+
+block pageContent
+  .container
+      h1= title
+      p Welcome to all #{title}
+      form(action='/viewAllEvents',method='post')
+        table.table-hover.table
+          thead
+            th #
+            th Event name
+            th Start Time
+            th End Time
+            th Invitation Date
+            th Invitation Platform
+            th Select
+          tbody
+            if (allEvents.length !== 0)
+              each event in allEvents
+                tr(eventID=event._id)
+                  th(scope=row)=event._id
+                  td=event.EventName
+                  td=event.StartTime
+                  td=event.EndTime
+                  td=event.InvitationDate
+                  td=event.InvitationPlatform
+                  td
+                    input.form-control(type='checkbox', name='ids[]', value=event._id)
+              tr
+                td(colspan=7)
+                  button.btn.btn-danger.pull-right.btn-lg.btn-block(type='submit ') Delete!
+            else 
+              tr
+                td.warning.text-center(colspan=7) 
+                  |There are no Events! 
+              tr
+                td(colspan=7) 
+                  a.btn.btn-primary.pull-right.btn-lg.btn-block(href="/addEvents") Add an Event?
+     
+        
+  script.
+    $('.table tbody tr th').click(function() {
+          var eventID = $(this).parent().attr('eventID');
+          window.location.href = location.protocol + "//" + location.host + "/editEvent/?eventID="+eventID;
+          $.get('/editEvent',{"eventID":eventID});
+
+    });

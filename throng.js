@@ -1,4 +1,3 @@
-
 /**
  * Module dependencies.
  */
@@ -8,7 +7,6 @@ var routes = require('./routes');
 var http = require('http');
 var path = require('path');
 var bodyParser  = require('body-parser');
-
 
 var app = express();
 
@@ -31,23 +29,23 @@ if ('development' == app.get('env')) {
 }
 
 app.get('/', routes.index);
-//app.get('/events', routes.events);
 
-var userdata = require('./routes/users');
-app.get('/viewAllUsers', userdata.findAll);
-app.get('/addUsers', userdata.addUsers);
-app.post('/addUsers', userdata.addUsers);
-app.post('/viewAllUsers', userdata.removeById);
+var userData = require('./routes/users');
+app.get('/viewAllUsers', userData.findAll);
+app.get('/addUsers', userData.addUsers);
+app.post('/addUsers', userData.addUsers);
+app.post('/viewAllUsers', userData.removeById);
 
+var eventData = require('./routes/events');
+app.get('/viewAllEvents', eventData.findAll);
+app.post('/viewAllEvents', eventData.removeById);
 
-// var carResource = require('./routes/cars');
-// app.get('/cars', carResource.findAll);
-// app.get('/cars/:id', carResource.findById);
-// app.post('/cars', carResource.create);
-// //app.delete('/cars/:id', carResource.removeById);
-// app.put('/cars/:id', carResource.update);
+app.get('/addEvents', eventData.addEvents);
+app.post('/addEvents', eventData.addEvents);
 
-
+app.get('/editEvent', eventData.findById);
+app.post('/editEvent', eventData.update);
+app.delete('/editEvent', eventData.removeGuest);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));

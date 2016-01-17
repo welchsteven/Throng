@@ -35,8 +35,14 @@ html(lang='en')
             ul.nav.navbar-nav
               li(class=title=='Throng'?'active':undefined)
                 a(href='/') Home
-              li(class=title=='Events'?'active':undefined)
-                a(href='/Events') Events
+              li.dropdown
+                a(href='#' class=title=='Event Management' class='dropdown-toggle' data-toggle='dropdown' role='button' aria-expanded='true') Events 
+                span.carret
+                ul.dropdown-menu(role='menu')
+                  li(class=subtitle=='View All Events'?'active':undefined) 
+                    a(href='/viewAllEvents' ) View All Events
+                  li(class=subtitle=='Add Events'?'active':undefined)
+                    a(href='/addEvents') Add Events  
               li.dropdown
                 a(href='#' class=title=='User Management' class='dropdown-toggle' data-toggle='dropdown' role='button' aria-expanded='true') Users 
                 span.carret

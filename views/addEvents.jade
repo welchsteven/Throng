@@ -1,0 +1,49 @@
+extends layout
+
+block pageContent
+  .container
+    h1=title
+    p Welcome to #{title}
+      form(action='/addEvents',method='post')
+        .form-group
+            label(for='InputEventName') Event Name
+            input#InputEventName.form-control(placeholder='Enter the name of the Event', type='text', name='EventName')
+        .form-group
+          label(for = 'InputEventStartTime') Event Date and Start Time 
+          div#InputEventStartTime.input-group.date
+            input.form-control(type = 'text', name='StartTime')
+            span.input-group-addon
+              span.glyphicon-calendar.glyphicon
+        .form-group
+          label(for = 'InputEventEndTime') Event Date and End Time
+          div#InputEventEndTime.input-group.date
+            input.form-control(type = 'text', name='EndTime')
+            span.input-group-addon
+              span.glyphicon-calendar.glyphicon
+        .form-group
+          label(for = 'InputEventInvitationDate') Event Date Invitation Date
+          div#InputEventInvitationDate.input-group.date
+            input.form-control(type = 'text', name='InvitationDate')
+            span.input-group-addon
+              span.glyphicon-calendar.glyphicon
+        .form-group
+          label(for = 'InputEventInvitationPlatform') Event Invitation Platform
+            select#InputEventInvitationDate.form-control(name='InvitationPlatform')
+              option(value = 'Facebook') Facebook
+              option(value = 'E-Mail') E-Mail
+              option(value = 'Phone') Phone
+              option(value = 'Text Message') Text Message
+        button.btn.btn-primary(type = 'submit') Submit
+
+  script.
+    $(function () {$('#InputEventStartTime').datetimepicker();});
+    $(function () {$('#InputEventEndTime').datetimepicker();});
+    $(function () {$('#InputEventInvitationDate').datetimepicker({format: 'L'});});
+    $(function () {$( "test" ).data( { baz: [ 1, 2, 3 ] } );});
+    
+   
+
+  script(src='//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.js')
+  script(src='//cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/d004434a5ff76e7b97c8b07c01f34ca69e635d97/src/js/bootstrap-datetimepicker.js')
+  link(href='//cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/d004434a5ff76e7b97c8b07c01f34ca69e635d97/build/css/bootstrap-datetimepicker.css', rel='stylesheet')
+

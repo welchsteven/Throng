@@ -1,0 +1,87 @@
+extends layout
+
+block pageContent
+  .container(id="editEvent" eventID=event._id)
+      h1= title
+      p Welcome to all #{title}
+      b Event Name: 
+      =' ' + event.EventName
+      br
+      b Event Start Date: 
+      =' ' + event.StartTime
+      
+      form(method="delete" action="/editEvent/")
+        table.table-hover.table.table-responsive
+          thead
+            th #
+            th First Name
+            th Last Name
+            th Age
+            th Gender
+            th Remove
+          tbody(id="guestList")
+            include guests
+            tr
+              td(colspan=6)
+                button.btn.btn-primary.btn-lg.btn-block(type="button" data-toggle="modal" data-target="#addGuestsModal" data-id=event._id) 
+                  span.glyphicon.glyphicon-plus(aria-hidden="true")
+                  |Add a Guest
+                  
+  include addGuestsModal
+  script.
+    function updateView(eventID){
+      var postData = new Object();
+      postData.eventID=eventID;
+      postData.ids = $(this).serializeArray();
+      var formURL = $(location).attr('href');
+      
+      $.ajax(
+          {
+              url: formURL,
+              type: "POST",
+              data: postData,
+              //dataType: 'json', // Choosing a JSON datatype
+              success: function(data, textStatus, jqXHR) {
+                  $('#guestList').html(responseHTML);
+              },
+              error: function(jqXHR, textStatus, errorThrown) {}
+          }
+      );    
+    }
+    
+    function deleteGuest(eventID, guestID){
+      var postData = new Object();
+      postData.guestID = guestID;
+      postData.eventID = eventID;
+      var formURL = $(location).attr('href') + '?eventID=' + eventID;
+      console.log(formURL);
+      $.ajax(
+          {
+              url: formURL,
+              type: "DELETE",
+              data: postData,
+              //dataType: 'json', // Choosing a JSON datatype
+              success: function(data, textStatus, jqXHR) {
+                  console.log(data);
+                  //$('#guestList').html(responseHTML);
+              },
+              error: function(jqXHR, textStatus, errorThrown) {}
+          }
+      );    
+    }
+
+    
+    $('#addGuestsModal').on('hidden.bs.modal', function (e) {
+      $(this).data('bs.modal', null);
+      
+      updateView($('#addGuestForm').attr( "eventID" ));
+      
+      
+    });
+    
+    // $(document).on("click", ":submit", function(e){
+        
+    //       e.preventDefault(); //STOP default action
+    //       deleteGuest($('#editEvent').attr('eventID'),$(this).val());
+    //     });
+    

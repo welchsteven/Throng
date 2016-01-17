@@ -1,0 +1,15 @@
+// ToDo
+// Display only Guests not the entire UserList
+// Edit Modal user list to exclude guests
+
+if (guests !== null)
+
+  each guest in guests
+    tr
+      th(scope=row)=guest._id
+      td=guest.FirstName
+      td=guest.LastName
+      td=guest.Age
+      td=guest.Gender
+      td
+        //button.btn.btn-danger.pull-right(type='submit', name='guestID', value=guest._id) Delete!

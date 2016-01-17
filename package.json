@@ -15,7 +15,8 @@
     "jade": "*",
     "mongodb": "*",
     "monk": "*",
-    "body-parser": "1.5.2"
+    "body-parser": "1.5.2",
+    "async": "0.9.0"
 
   }
 }

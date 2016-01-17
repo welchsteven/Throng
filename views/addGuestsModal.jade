@@ -1,0 +1,27 @@
+div.modal.fade.addGuestsModal(id="addGuestsModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true")
+  .modal-dialog
+    .modal-content
+      .modal-header
+        button.close(type='button', data-dismiss='modal', aria-label='Close')
+          span(aria-hidden='true') ×
+        h4.modal-title Select Users to add to the Guest List
+      .modal-body
+        form(id="addGuestForm" eventID=event._id method="post" action="/editEvent/" )
+          table.table-hover.table
+            thead
+              th Select
+              th First Name
+              th Last Name
+            tbody
+              each user in users
+                tr  
+                  td
+                    input.form-control(type='checkbox', name='userID', value=user._id)
+                  td=user.FirstName
+                  td=user.LastName
+                  td(style="display:none;" scope=row)=user._id
+        
+          .modal-footer
+            button.btn.btn-primary(type='submit' id='SaveChanges') Save changes
+script(src='/javascripts/addGuestForm.js')
+    

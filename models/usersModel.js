@@ -47,6 +47,15 @@ users.prototype.removeById = function(ids, success, error) {
         
         
 };
+
+users.prototype.findGuests = function(Resource, success, error) {
+                if(Resource != null){
+                        if(Resource.guests != null){
+                                this.users.find({_id: { $in : Resource.guests } }, response(success,error));
+                        }
+                        else response(success(null), error)
+                }
+};
  
 // Callback to the supplied success and error functions
 // The caller will supply this function. The callers implementation

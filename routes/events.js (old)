@@ -1,0 +1,94 @@
+var events = require('../models/eventsModel')();
+var users = require('../models/usersModel')();
+
+
+exports.findAll = function(req, res) {
+        
+        var ok = function(eventResources, error) {
+
+                res.render('viewAllEvents', {
+                        title: 'Event Management',
+                        allEvents: eventResources
+                });
+        };
+
+        var err = function(err) {
+                res.send(404);
+        };
+        events.findAll(ok, err);
+};
+
+exports.addEvents = function(req, res) {
+        var ok = function(doc) {
+                res.render('addEvents', {
+                        title: 'Event Management'
+                });
+        };
+        var err = function(err) {
+                res.send(409, "Failed to create event");
+        };
+        if (req.method == "GET") {
+                res.render('addEvents', {
+                        title: 'Event Management'
+                });
+
+        }
+        else if (req.method == "POST") {
+                events.addEvents(req.body, ok, err);
+        }
+};
+
+// exports.update = function(req, res) {
+//         if (!req.body._id) {
+//                 res.send(404, "id required");
+//         } else {
+//                 var ok = function(doc) {
+//                         res.send(200);
+//                 };
+//                 var err = function(err) {
+//                         res.send(409, "update failed");
+//                 };
+//                 cars.update(req.body, ok, err);
+//         }
+// };
+
+exports.removeById = function(req, res) {
+        var i=0;
+        
+        var ok = function(doc) {
+
+        };
+        
+        var err = function(err) {
+                res.send(409, "Failed to remove event");
+        };
+        events.removeById(req.body.ids, ok, err);
+        res.redirect('/viewAllEvents');
+};
+
+exports.findById = function(req, res) {
+var eventResource;        
+var userResources;
+
+        var okEvent = function(Resource, error) {
+                eventResource = Resource;
+        };
+        var okUser = function(Resource, error) {
+                userResources = Resource;
+        };
+        var err = function(err) {
+                res.send(404);
+        };
+        
+        
+        
+        res.render('editEvent', 
+                {
+                        title: 'Event Management',
+                        event: eventResource,
+                        users: userResources
+                        
+                });
+        events.findById(req.query.eventID, okEvent, err);
+        users.findAll(okUser,err);
+};
